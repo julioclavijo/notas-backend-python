@@ -55,7 +55,7 @@ async def actualizar_producto(producto_id: int, producto_actualizado: Producto):
     raise HTTPException(status_code=404, detail="Producto no encontrado")
 
 # eliminar el registro productos
-@app.delete("/Producto/{producto_id}")
+@app.delete("/producto/{producto_id}")
 async def eliminar_Producto(producto_id: int):
     for producto in producto_db:
         if producto.id == producto_id:
