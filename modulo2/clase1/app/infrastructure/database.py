@@ -26,3 +26,17 @@ database_url = URL.create(
     port=port,
     database=database,
 )
+
+engine = create_engine(database_url, pool_pre_ping=True) 
+SessionLocal = sessionmaker(bind=engine)
+
+def get_session() -> Generator[Session, None, None]:
+    with SessionLocal() as session:
+        yield session
+
+def ping(session: Session) -> None: 
+    session.execute(text("SELECT 1"))
+    
+def crear_tablas() -> None: 
+    from app.infrastructure.models import Base
+    Base.metadata.create_all(bind=engine)
