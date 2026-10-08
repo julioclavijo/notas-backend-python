@@ -34,7 +34,7 @@ SessionLocal = sessionmaker(bind=engine)
 
 def get_session() -> Generator[Session, None, None]:
     with SessionLocal() as session:
-        yield session
+        yield session # transferencia de sesion
 
 def ping(session: Session) -> None: 
     session.execute(text("SELECT 1"))
