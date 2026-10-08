@@ -7,7 +7,9 @@ from sqlalchemy import create_engine, text  # `create_engine`: crea conexión a 
 from sqlalchemy.engine import URL  # Clase para construir URLs de conexión a la BD (ej: `postgresql://user:pass@host/db`).
 from sqlalchemy.orm import Session, sessionmaker  # `Session`: sesión ORM; `sessionmaker`: fábrica de sesiones.
 
-raiz_proyecto = Path(__file__).resolve().parent[2]  # Obtiene ruta base del proyecto subiendo 2 niveles desde el archivo actual
+from app.infrastructure import models #revisar
+
+raiz_proyecto = Path(__file__).resolve().parents[2]  # Obtiene ruta base del proyecto subiendo 2 niveles desde el archivo actual
 load_dotenv(raiz_proyecto / '.env')  # Carga variables de entorno
 
 # Carga de variables
