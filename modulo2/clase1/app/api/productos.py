@@ -1,13 +1,14 @@
 from fastapi import APIRouter, Depends, HTTPException
-from application.exceptions import DatosInvalidosProducto, ProductoNoEncontrado, NombreYaRegistrado 
-from application.services import ProductoService
-from presentation.dependencies import get_producto_service
-from schemas.producto import ProductoEntrada, ProductoSalida
 
-router = APIRouter(prefijo="/productos", tags=["Productos"]) # prefijo: se añade a la raiz de la ruta
+from app.application.exceptions import DatosInvalidosProducto, ProductoNoEncontrado, NombreYaRegistrado 
+from app.application.services import ProductoService
+from app.presentation.dependencies import get_producto_service
+from app.schemas.producto import ProductoEntrada, ProductoSalida
+
+router = APIRouter(prefix="/productos", tags=["Productos"]) # prefijo: se añade a la raiz de la ruta
 # para documentar se usa tags=["Productos"], pero se usa otras librerias
 
-@router.post("", response_modeL=ProductoSalida, status_code=201) 
+@router.post("", response_model=ProductoSalida, status_code=201) 
 def crear_producto(
     entrada: ProductoEntrada,
     service: ProductoService = Depends(get_producto_service) ) -> ProductoSalida:
@@ -19,14 +20,14 @@ def crear_producto(
     return ProductoSalida.model_validate(producto)
 
 
-@router.get("", response_modeL=list[ProductoSalida] )
+@router.get("", response_model=list[ProductoSalida] )
 def listar_productos(service: ProductoService = Depends(get_producto_service)) -> list[ProductoSalida]:
     return[ProductoSalida.model_validate(producto) for producto in service.listar()]
 
-@router.get("/{producto_id}", response_modeL=ProductoSalida)
+@router.get("/{producto_id}", response_model=ProductoSalida)
 def obtener_producto(producto_id: int, service: ProductoService = Depends(get_producto_service)) -> ProductoSalida:
     try:
-        producto = service.obtener(producto_id)
+        producto_id = service.obtener_por_id(producto_id)
     except ProductoNoEncontrado:
         raise HTTPException(status_code=404, detail="Producto no encontrado") from None 
-    return ProductoSalida.model_validate(producto)
+    return ProductoSalida.model_validate(producto_id)

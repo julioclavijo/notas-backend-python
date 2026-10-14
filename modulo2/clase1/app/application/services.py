@@ -1,11 +1,11 @@
 from decimal import Decimal 
 from sqlalchemy.orm import Session
 
-from application.exceptions import NombreYaRegistrado, ProductoNoEncontrado, DatosInvalidosProducto 
-from infrastructure.database import ping 
-from infrastructure.exceptions import ErrorNombreDuplicado, ErrorRestriccion
-from infrastructure.models import Producto 
-from infrastructure.repositories import ProductoRepository 
+from app.application.exceptions import NombreYaRegistrado, ProductoNoEncontrado, DatosInvalidosProducto 
+from app.infrastructure.database import ping 
+from app.infrastructure.exceptions import ErrorNombreDuplicado, ErrorRestriccion
+from app.infrastructure.models import Producto 
+from app.infrastructure.repositories import ProductoRepository 
 
 class ProductoService:
     def __init__(self, repository: ProductoRepository) -> None:
@@ -25,9 +25,9 @@ class ProductoService:
 
     def obtener_por_id(self, producto_id: int) -> Producto:
         producto_id = self.repository.obtener_por_id(producto_id)
-        if producto is None:
+        if producto_id is None:
             raise ProductoNoEncontrado()
-        return producto
+        return producto_id
 
 class SaludService:
     def __init__(self, session: Session) -> None:

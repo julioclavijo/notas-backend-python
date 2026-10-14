@@ -4,8 +4,8 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from infrastructure.exceptions import ErrorNombreDuplicado, ErrorRestriccion
-from infrastructure.models import Producto
+from app.infrastructure.exceptions import ErrorNombreDuplicado, ErrorRestriccion
+from app.infrastructure.models import Producto
 
 class ProductoRepository:
     def __init__(self, session: Session) -> None:

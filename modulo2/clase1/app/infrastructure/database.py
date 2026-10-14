@@ -7,8 +7,7 @@ from sqlalchemy import create_engine, text  # `create_engine`: crea conexión a 
 from sqlalchemy.engine import URL  # Clase para construir URLs de conexión a la BD (ej: `postgresql://user:pass@host/db`).
 from sqlalchemy.orm import Session, sessionmaker  # `Session`: sesión ORM; `sessionmaker`: fábrica de sesiones.
 
-from app.infrastructure import models #revisar
-
+from app.infrastructure import models #modificado 
 raiz_proyecto = Path(__file__).resolve().parents[2]  # Obtiene ruta base del proyecto subiendo 2 niveles desde el archivo actual
 load_dotenv(raiz_proyecto / '.env')  # Carga variables de entorno
 
@@ -21,7 +20,7 @@ database = os.environ.get("DB_NAME", "curso_python")
 
 # URL de conexión a la BD
 database_url = URL.create(
-    "postgresql+psycopg2",
+    "postgresql+psycopg",
     username=username,
     password=password,
     host=host,

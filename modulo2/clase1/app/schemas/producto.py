@@ -14,6 +14,6 @@ class ProductoEntrada(BaseModel) :
             raise ValueError("El nombre no puede estar vacío")
         return valor_limpio
 
-class ProdcutoSalida(ProductoEntrada):
+class ProductoSalida(ProductoEntrada):
     model_config = ConfigDict(from_attributes=True) # convierte los atributos de la clase a los atributos de la base
     id: int
