@@ -41,6 +41,7 @@ def obtener_producto(producto_id: int, service: ProductoService = Depends(get_pr
         raise HTTPException(status_code=404, detail="Producto no encontrado")
     return ProductoSalida.model_validate(producto)
 
+# Actualiza completamente un producto existente por ID con validación de datos y manejo de errores
 @router.put("/{producto_id}", response_model=ProductoSalida)
 def reemplazar_producto(
     producto_id: int,
@@ -57,6 +58,7 @@ def reemplazar_producto(
         raise HTTPException(status_code=400, detail="Datos inválidos para el producto")
     return ProductoSalida.model_validate(producto)
 
+# Elimina un producto por ID y devuelve 204 No Content si existe, 404 si no
 @router.delete("/{producto_id}", status_code=204)
 def eliminar_producto(
     producto_id: int,
@@ -66,6 +68,5 @@ def eliminar_producto(
         service.eliminar(producto_id)
     except ProductoNoEncontrado:
         raise HTTPException(status_code=404, detail="Producto no encontrado")
-
 
 
