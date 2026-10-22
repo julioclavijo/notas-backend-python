@@ -31,8 +31,8 @@ class ProductoService:
             raise DatosInvalidosProducto() from None
     
     # Opcion de listar los productos
-    def listar(self, desde: int = 0, Limite: int = 100) -> list[Producto]:
-        return self. repository.listar(desde=desde, Limite=Limite)
+    def listar(self, desde: int = 0, limite: int = 100) -> list[Producto]:
+        return self.repository.listar(desde=desde, limite=limite)
 
     # Opcion de obtener un producto por su ID
     def obtener(self, producto_id: int) -> Producto:

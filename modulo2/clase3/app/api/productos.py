@@ -2,8 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 
 from application.exceptions import NombreYaRegistrado, ProductoNoEncontrado, DatosInvalidosProducto
 from application.services import ProductoService
-from presentation.dependencies import get_producto_service
-from app.schemas.producto import ProductoActualizar, ProductoEntrada, ProductoSalida
+from presentacion.dependencies import get_producto_service
+from schemas.producto import ProductoActualizar, ProductoEntrada, ProductoSalida
 
 router = APIRouter(prefix="/productos", tags=["Productos"])
 
@@ -68,5 +68,4 @@ def eliminar_producto(
         service.eliminar(producto_id)
     except ProductoNoEncontrado:
         raise HTTPException(status_code=404, detail="Producto no encontrado")
-
 

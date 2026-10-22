@@ -17,5 +17,5 @@ class Producto(Base):
     )  # Constraintes para la tabla
     id: Mapped[int] = mapped_column(Identity(), primary_key=True)  # Atributo
     nombre: Mapped[str] = mapped_column(String(120), nullable=False)
-    precio: Mapped[Decimal] = mapped_column((12,2), nullable=False)
+    precio: Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False)
     stock: Mapped[int] = mapped_column(default=0, nullable=False)

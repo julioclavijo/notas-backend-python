@@ -4,7 +4,7 @@ from collections.abc import Generator
 from pathlib import Path
 
 from dotenv import load_dotenv
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.engine import URL
 from sqlalchemy.exc import OperationalError # Para manejar errores de conexión a la BD.
 from sqlalchemy.orm import Session, sessionmaker
