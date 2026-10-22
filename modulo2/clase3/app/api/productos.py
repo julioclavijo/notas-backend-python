@@ -40,3 +40,32 @@ def obtener_producto(producto_id: int, service: ProductoService = Depends(get_pr
     except ProductoNoEncontrado:
         raise HTTPException(status_code=404, detail="Producto no encontrado")
     return ProductoSalida.model_validate(producto)
+
+@router.put("/{producto_id}", response_model=ProductoSalida)
+def reemplazar_producto(
+    producto_id: int,
+    entrada: ProductoActualizar,
+    service: ProductoService = Depends(get_producto_service)
+) -> ProductoSalida:
+    try:
+        producto = service.actualizar(producto_id, **entrada.model_dump())
+    except ProductoNoEncontrado:
+        raise HTTPException(status_code=404, detail="Producto no encontrado")
+    except NombreYaRegistrado:
+        raise HTTPException(status_code=409, detail="Nombre ya registrado")
+    except DatosInvalidosProducto:
+        raise HTTPException(status_code=400, detail="Datos inválidos para el producto")
+    return ProductoSalida.model_validate(producto)
+
+@router.delete("/{producto_id}", status_code=204)
+def eliminar_producto(
+    producto_id: int,
+    service: ProductoService = Depends(get_producto_service)
+) -> None:
+    try:
+        service.eliminar(producto_id)
+    except ProductoNoEncontrado:
+        raise HTTPException(status_code=404, detail="Producto no encontrado")
+
+
+
