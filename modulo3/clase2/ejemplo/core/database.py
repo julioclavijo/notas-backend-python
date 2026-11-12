@@ -28,4 +28,4 @@ def get_db():
 def init_db() -> None:
     import models.user
     Base.metadata.create_all(bind=engine)
-    print("Base de datos inicializada")
+    # print("Base de datos inicializada")
