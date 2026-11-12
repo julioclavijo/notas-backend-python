@@ -45,3 +45,12 @@ class User(Base):
             raise ValueError("El nombre de usuario solo puede contener letras, números, guiones y guiones bajos")
 
         return username.strip().lower()
+
+    @validates('hashed_password')
+    def validate_hashed_password(self, key, hashed_password: str) -> str:
+        if not hashed_password:
+            raise ValueError("La contraseña hasheada no puede estar vacía")
+        return hashed_password
+
+    def __repr__(self) -> str:
+        return f"<User(id={self.id}, username='{self.username}')>"

@@ -24,3 +24,8 @@ def get_db():
         raise
     finally:
         db.close()
+
+def init_db() -> None:
+    import models.user
+    Base.metadata.create_all(bind=engine)
+    print("Base de datos inicializada")
