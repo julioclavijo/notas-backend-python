@@ -38,7 +38,7 @@ app = FastAPI(
 add_middlewares(app)
 register_exception_handlers(app)
 app.include_router(auth_router, prefix="/api/v1")
-app.include_router(user_router, prefix="api/v1")
+app.include_router(user_router, prefix="/api/v1")
 
 
 def main():

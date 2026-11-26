@@ -10,7 +10,7 @@ from repository.user_repository import UserRepository
 security = HTTPBearer(auto_error=False) # Controlar errores
 
 def _limpiar_token(token: str) -> str:
-    token = toker.strip().strip('"').strip("'")
+    token = token.strip().strip('"').strip("'")
     if token.lower().startswith("bearer"): # lo pasa minuscula y revisa si empieza con bearer
         token = token[7:].strip()
     return token
